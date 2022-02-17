@@ -26,7 +26,8 @@ namespace ComCastExample
 
             var element = document.getElementById("fname");
             var isHtmlFrameElement = element is HTMLFrameElement;
-            Console.WriteLine("Element is " + (isHtmlFrameElement ? "" : "NOT ") + "a frame element");
+            Console.WriteLine($"Element has Tag {element.tagName} and value {element.getAttribute("value")}");
+            Console.WriteLine($"Element is {(isHtmlFrameElement ? "" : "NOT ")}a frame element");
             return 0;
         }
 
