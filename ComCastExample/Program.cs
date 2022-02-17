@@ -25,9 +25,17 @@ namespace ComCastExample
                 return 1;
 
             var element = document.getElementById("fname");
-            var isHtmlFrameElement = element is HTMLFrameElement;
+            var isHtmlFrameElement = element is DispHTMLInputElement;
             Console.WriteLine($"Element has Tag {element.tagName} and value {element.getAttribute("value")}");
-            Console.WriteLine($"Element is {(isHtmlFrameElement ? "" : "NOT ")}a frame element");
+            Console.WriteLine($"Element is {(element is DispHTMLInputElement ? "" : "NOT ")}a DispHTMLInputElement element");
+            Console.WriteLine($"Element is {(element is HTMLInputElementClass ? "" : "NOT ")}a HTMLInputElementClass element");
+            Console.WriteLine($"Element is {(element is HTMLInputElement ? "" : "NOT ")}a HTMLInputElement element");
+            Console.WriteLine($"Element is {(element is IHTMLInputElement ? "" : "NOT ")}a IHTMLInputElement element");
+
+            Console.WriteLine($"Element is {(element is DispHTMLFrameElement ? "" : "NOT ")}a DispHTMLFrameElement element");
+            Console.WriteLine($"Element is {(element is HTMLFrameElementClass ? "" : "NOT ")}a HTMLFrameElementClass element");
+            Console.WriteLine($"Element is {(element is HTMLFrameElement ? "" : "NOT ")}a HTMLFrameElement element");
+            Console.WriteLine($"Element is {(element is IHTMLFrameElement ? "" : "NOT ")}a IHTMLFrameElement element");
             return 0;
         }
 
