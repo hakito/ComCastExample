@@ -48,15 +48,18 @@ namespace ComCastExample
             var tcs = new TaskCompletionSource<InternetExplorer>();
             var cts = new CancellationTokenSource(timeout);
             cts.Token.Register(() => tcs.TrySetCanceled());
-            var before = new HashSet<InternetExplorer>(shellWindows.OfType<InternetExplorer>());
+            var ignoreList = new HashSet<InternetExplorer>(shellWindows.OfType<InternetExplorer>());
+            var url = "https://www.w3schools.com/html/html_forms.asp";
             shellWindows.WindowRegistered += _ =>
             {
-                var window = shellWindows.OfType<InternetExplorer>().Except(before).FirstOrDefault();
-                if (window != null)
-                    tcs.SetResult(window);
+                foreach (var window in shellWindows
+                             .OfType<InternetExplorer>()
+                             .Except(ignoreList)
+                             .Where(ie => ie.LocationURL == url))
+                    tcs.TrySetResult(window);
             };
 
-            Process.Start("IExplore.exe", "https://www.w3schools.com/html/html_forms.asp");
+            Process.Start("IExplore.exe", url);
             return await tcs.Task;
         }
     }
